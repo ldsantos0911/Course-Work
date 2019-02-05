@@ -1,0 +1,35 @@
+align_result align(string s, string t, memo_type &memo)
+
+    IF s is empty OR t is empty:
+        Create new align_result instance, answer
+        Determine size difference between s and t
+        Set instruction character to 's' if s is longer or
+        't' if t is longer.
+        add GAP_SCORE to answer.score as many times as needed
+        append instruction character to answer.inst as many times as needed
+        return answer
+
+    align_result choice_1, choice_2, choice_3;
+
+    IF s[0] and t[0] are matching:
+        add MATCHING to choice_1.score
+        append '|' to choice_1.inst
+    ELSE
+        add MISMATCH to choice_1.score
+        append '*' to choice_1.inst
+
+    add GAP_SCORE to choice_2.score
+    add GAP_SCORE to choice_3.score
+    append 's' to choice_2.inst
+    append 't' to choice_3.inst
+
+    align_result choice_1r, choice_2r, choice_3r;
+    choice_1r = align(s w/o first character, t w/o first character)
+    choice_2r = align(s w/o first character, t)
+    choice_3r = align(s, t w/o first character)
+
+    add scores and append instruction strings of choice_1r-3r to choice_1-3
+
+    align_result answer;
+    find maximum score between choice_1-3 and assign to answer
+    return answer

@@ -1,0 +1,19 @@
+If you happen to know a bit of information about the maze, DFS could be better
+than BFS, statistically. For example, if you happen to know that there are more
+left turns than right turns and you code DFS to check left first, then DFS may
+guess correctly most of the time, making it efficient to get to the end. BFS is
+good at exploring many paths which continue for long distances
+simultaneously, whereas DFS has to sequentially explore all of them. So, if a
+maze has many intersections and there is no information given, BFS will be better
+because it will more efficiently explore all of the possible paths. The speeds
+of the algorithms may be similar if there are not many intersections or if the
+lengths of incorrect paths are small.
+
+An escalator involves the implementation of a queue. The first person to board it
+at the bottom or top is the first person to exit. The last person to board is the
+last person to exit.
+
+An elevator can more-or-less operate using a stack. The first person to enter it
+moves to the back of the elevator, whereas the last person remains at the front.
+In a tightly-packed elevator, the first person to leave must be the person who
+entered last, leaving the person who entered first to exit last.

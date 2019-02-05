@@ -1,0 +1,11 @@
+The Backward Euler:
+The backward method energy decreases and the planet spirals into the star it is
+orbiting. This is not accurate.
+q
+The Forward Euler:
+The forward method energy increases and the planet slowly spirals farther and
+farther away from the star. This is not accurate either.
+
+The Symplectic Euler:
+The symplectic method maintains relatively constant energy and the planet maintains
+a relatively consistent elliptical orbit. This is the most accurate representation.

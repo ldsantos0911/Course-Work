@@ -1,0 +1,10 @@
+The fourier transform transforms from time coordinates to frequency coordinates.
+A normal sine wave has two frequency, a positive and negative one. Therefore, a
+normal fourier transform will consist of a line pointing in the positive y direction
+and the negative y direction, to represent the two present frequencies. I would
+expect the discrete transform to have two positive lines, for it will only detect
+one frequency, not gleaning its sign from the data supplied.
+
+As the function becomes more and more complicated, the fourier transform will
+become more and more complicated, for it will represent more and more present
+frequencies.

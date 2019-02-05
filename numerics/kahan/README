@@ -1,0 +1,4 @@
+The imprecision in the naive summation is an effect of adding an extremely small
+number to 1. Addition to a double is not precise enough to accommodate the
+addition of values as small as 10^-8. 10^-8 is rounded out after each addition,
+so each addition of 10^-8 does not accumulate if naively added.

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+ 	<body>
+	  	<h1>WIRC_POL Query</h1>
+	    <hr>
+	  	<form method="post">
+	        <label for="query">Query WIRC_POL Database: </label>
+	        <input name="query" id="query" value="{{ request.form['query'] }}" required>
+	        <input type="submit" value="Submit">
+	    </form>
+	    {% if fields != [] %}
+	    	<br>
+	    	<form action="/query_db" method="GET">
+		    	<b><label for="return">{{ count }} results found.</label></b>
+		    	<button name="clear" id="clear">Clear Results</button>
+		    </form> 
+		    <hr>
+		    <table border=1px border-spacing=0 id="results" class = "tablesorter">
+		    <thead>
+			<tr>
+		    {% for field in fields %}
+		    <th>{{ field }} </th>
+		    {% endfor %}
+		    </tr>
+			</thead>
+			<tbody>
+			{% for i in range(length) %}
+		    <tr>
+		    	{% for x in data[i] %}
+		    		<td> {{ x }} </td>
+		    	{% endfor %}
+		    </tr>
+		    {% endfor %}
+			</tbody>
+		    </table> 
+		{% endif %} 
+	</body>
+	<script>
+		$(document).ready(function(){ 
+			$("results").tablesorter(); 
+		}); 
+	</script>
+{% endblock %}

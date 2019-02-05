@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Target References</h1>
+    <hr>
+    <form method="post">
+        <label for="query">Query 'target_refs' Table: </label>
+        <input name="query" id="query" value="{{ request.form['query'] }}" required>
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    <body>
+        <table border=1px border-spacing=0 id="ref" class = "tablesorter">
+        <thead>
+    	<tr>
+        {% for field in fields %}
+        <th>{{ field }} </th>
+        {% endfor %}
+        </tr>
+    	</thead>
+    	<tbody>
+        {% for datum in data %}
+        <tr>
+        {% for x in datum %}
+        <td> {{ x }} </td>
+        {% endfor %}
+        </tr>
+        {% endfor %}
+    	</tbody>
+        </table>   
+    </body>
+    <script>
+    	$(document).ready(function(){ 
+    		$("#ref").tablesorter(); 
+    	}); 
+    </script>
+{% endblock %}

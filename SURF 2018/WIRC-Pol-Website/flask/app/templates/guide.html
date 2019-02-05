@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<body>
+		<h1>WIRC+Pol User Guide</h1>
+		<hr>
+		<br>
+		<h2>Webpages</h2>
+		<hr>
+		<h3>Schema Spy</h3>
+		<p1>The database structure page uses the service SchemaSpy to generate information on the
+			layout of the WIRC_POL database. It gives lists of all of the columns and shows schematics
+			of the relationships between tables.
+		</p1>
+		<h3>/standards</h3>
+		<p1>The standards page shows a table of all of the unpolarized standards in the database,
+			giving the option to query the database to manipulate the data shown.</p1>
+		<h3>/references</h3>
+		<p1>The references page shows a table of references associated with various targets from the
+			database. Additionally, the user can query the database from this page.
+		<h3>/targets</h3>
+		<p1>On the targets page, a user can view data for all of the WIRC+Pol targets in the database.
+			Additionally, the user can query the database. Finally, by clicking on the object name, the user
+			is directed to a page which contains the database information for a particular target, as well as
+			an automatically generating finding chart for said target. </p1>
+		<h3>/rawfiles</h3>
+		<p1>The rawfiles page shows a table containing the header information and file paths for all of the
+			raw FITS files that have been entered into the database. Additionally, there is a query box.
+			Clicking a raw filename will bring the user to a page to view all of the header data, as well
+			as a pyplots image of the FITS file. </p1>
+		<h3>/calibfiles</h3>
+		<p1>The calibfiles page shows a table containing the header information and file paths for all of the
+			auto-calibrated FITS files in the the database. Additionally, there is a query box. Clicking a Calibrated
+			filename will bring the user to a page which displays all of the calibrated header data, as well as a pyplots
+			image of the FITS file. Finally, the page will also include a list of the raw file, master dark, and master flat
+			which were used to generate this image, with links to fitsviewer pages.</p1>
+		<h3>/darks</h3>
+		<p1>The darks page shows a table containing some useful information pertaining to the master darks
+			in the database, giving a query box to more narrowly search. Clicking a master dark filename will redirect
+			to a page which displays master dark header data, as well as a pyplots image of the FITS file. Finally, the page
+			includes a list of the dark images used to generate this master dark, with links to the fitsviewer pages for them. </p1>
+		<h3>/flats</h3>
+		<p1>The flats page shows a table containing some useful information pertaining to the master flats
+			in the database, giving a query box to more narrowly search. Clicking a master flat filename will redirect
+			to a page which displays master flat header data, as well as a pyplots image of the FITS file. Finally, the page
+			includes a list of the flat images used to generate this master flat, with links to the fitsviewer pages for them.</p1>
+		<h3>/skies</h3>
+		<p1>The skies page shows a table containing some useful information pertaining to the master skies
+			in the database, giving a query box to more narrowly search. Clicking a master sky filename will redirect
+			to a page which displays master sky header data, as well as a pyplots image of the FITS file. Finally, the page
+			includes a list of the sky images used to generate this master sky, with links to the fitsviewer pages for them.</p1>
+		<h3>/search</h3>
+		<p1>The search page provides an interface to display specific target database columns for data matching specific criteria.
+		This page allows one to generate multiple queries and display database data pertaining to each of them. For example, if
+		one queried for targets with RA > 5 and added an additional query for RA < 5, the search would display all database entries
+	  with RA not equal to 5.</p1>
+		<h3>/query_db</h3>
+		<p1>The query page simply provides a dedicated textbox where a user can enter a database query and view any combination
+			or subset of data. Simply enter the query and press enter.</p1>
+		<h3>/plot_query</h3>
+		<p1>The query plotting page allows a user to query the database for any two numeric variables and plot them against
+		each other. The page generates a plot of the values, with labeled axes, and shows a table of the values. See Usage Information for
+		more details on using this page.</p1>
+		<h3>/fc</h3>
+		<p1>The finding chart pages lets you enter an object name, as well as an RA and DEC to generate a finding chart
+			for a specific object. (It is preferable that the user enter RA and DEC corresponding to object)</p1>
+		<br>
+		<br>
+		<h2>Usage Information</h2>
+		<hr>
+		<h3>Queries</h3>
+		<p1>Several pages on the WIRC+Pol website allow the user to enter queries in the
+		Structured Query Language (SQL). For assistance with the SQL syntax and usage, refer to the
+		following resources:
+		<ul>
+			<li><a href="https://www.codecademy.com/learn/learn-sql">Codecademy</a></li>
+			<li><a href="https://www.w3schools.com/sql/">W3 Schools Tutorial</a></li>
+			<li><a href="http://www.sqltutorial.org/">SQL Tutorial</a></li>
+		</ul>
+		Additionally, while not always required, please place backticks (``) around table and
+		column names to ensure proper functionality. Some columns (e.g. 'DEC') will be recognized
+		as SQL keywords if not enclosed in backticks.
+		</p1>
+		<h4>Example Queries</h4>
+		<p1>The following query gathers all columns for no more than 50 raw files which are polarimetry images:
+			<ul>
+				<li><small><font face="courier new">SELECT * FROM `raw_files` WHERE `Image_Type` = "pol" LIMIT 50</font></small></li>
+			</ul>
+			The following query gathers the Name, RA, and DEC columns for no more than 50 targets which have "000" in their name:
+			<ul>
+				<li><small><font face="courier new">SELECT `Name`, `RA`, `DEC` FROM `targets` WHERE `Name` LIKE "%000%" LIMIT 50</font></small></li>
+			</ul>
+			The following query gathers `targets`.`Name`, `targets`.`id`, `raw_files`.`UTSHUT`, `targets`.`J`, and `targets`.`K`, joining where
+			the raw_files id matches the target id and is greater than 0.
+			<ul>
+				<li><small><font face="courier new">SELECT `targets`.`Name`, `targets`.`id`,  `raw_files`.`UTSHUT`, `targets`.`J`, `targets`.`K` FROM targets INNER JOIN `raw_files` ON `targets`.`id` = `raw_files`.`tar_id` WHERE `raw_files`.`tar_id` > 0</font></small></li>
+			</ul>
+		</p1>
+
+		<h3>Plotting Queried Variables</h3>
+		<p1>The query plotting page allows the user to plot any two numeric values from the
+		database against each other. This functionality is designed to work only when exactly two
+	  numeric values are provided. Aside from that, there are no restrictions. A user can enter any
+  	query that will return two columns, each with some sort of numeric value, and the program
+		will plot these values against each other and display the plot on the website. It is worth
+		specifically mentioning that this functionality extends to column arithmetic and other operations.
+		For example, you can plot one column against the difference of two other columns, generated by your query.
+	</p1>
+	</body>
+{% endblock %}

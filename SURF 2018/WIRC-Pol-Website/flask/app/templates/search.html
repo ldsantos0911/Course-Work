@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <body>
+	<h3> Advanced Search </h3>
+	<hr>
+	<form method="post" name="query">
+		<p>
+		View: {{ form.view }}
+		{{ form.queries }}
+		{{ form.submit }}	
+		</p>
+	</form>
+	<form action="/search/a" method="get">
+		<button> + </button>
+		<button formaction="/search/p"> - </button>
+	</form>
+</body> 
+{% endblock %}

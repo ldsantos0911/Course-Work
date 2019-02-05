@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+	<form action="{{ address }}" method="get">
+			<button>Go Back to {{ address.replace('/', '') }}</button>
+	</form>
+	<div style="text-align:center;">
+			<img src="{{ url_for('create_fits', filename=filename) }}">
+		{% if file_list != [] %}
+				<table border=5px border-spacing=0 id="files">
+					<tr>
+					<th colspan="1"> <h2> File List </a></th>
+						{% for file in file_list %}
+						<tr>
+							<td> <a href="{{url_for('fitsview', url_safe_name=url_safe(file), address=address)}}">{{file}}</a> </td>
+						</tr>
+						{% endfor %}
+				</table>
+		{% endif %}
+	</div>
+
+	<div style="float:left;">
+		<table border=1px border-spacing=0 id="header">
+		<tr>
+		<th colspan="2"> <h3> File: {{filename}}</h3></th>
+		{% for item in items %}
+		<tr>
+		<td> {{item[0]}} </td><td> {{item[1]}} </td>
+		</tr>
+		{% endfor %}
+		</table>
+	</div>
+
+</body>
+{% endblock %}

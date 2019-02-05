@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- <link rel="stylesheet" href="./static/css/style.css"> -->
+		<script type="text/javascript" src="../static/js/jquery-3.2.1.js"></script>
+		<script type="text/javascript" src="../static/js/jquery.tablesorter.js"></script>
+		<a href="/"><img src="wircpol_logo.png" style="width:128px;height:128px;"></a>
+		<hr>
+	</head>
+	<section class="content">
+	<header>
+		{% block header %}{% endblock %}
+	</header>
+	{% for message in get_flashed_messages() %}
+		<b><div class="flash" style="color : red">{{ message }}</div><b>
+		<br>
+	{% endfor %}
+	{% block content %}{% endblock %}
+	</section>
+</html>

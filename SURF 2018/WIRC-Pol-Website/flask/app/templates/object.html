@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+	<form action="/targets" method="get">
+			<button>Return to Targets</button>
+	</form>
+	<div style="float:left;">
+		<table border=1px border-spacing=0 id="target">
+		<tr>
+		<th colspan="2"> <h3> Object: {{items[0][1]}}</h3></th>
+		{% for item in items[2:] %}
+		<tr>
+		<td> {{item[0]}} </td><td> {{item[1]}} </td>
+		</tr>
+		{% endfor %}
+		</table>
+	</div>  
+
+	<div style="float:left;">
+		<img src="{{ fname }}">
+	</div>
+	
+</body>
+{% endblock %}

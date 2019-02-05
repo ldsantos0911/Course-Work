@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+  <body>
+  	<h1>Raw Files</h1>
+    <hr>
+  	<form method="post">
+        <label for="query">Query 'raw_files' Table: </label>
+        <input name="query" id="query" value="{{ request.form['query'] }}" size="100" required>
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+
+    <b><label for="return">{{ count }} results found.</label></b>
+
+	</form>
+    <hr>
+    <table border=1px border-spacing=0 id="raw_files" class = "tablesorter">
+    <thead>
+	<tr>
+    {% for field in fields %}
+    <th>{{ field }} </th>
+    {% endfor %}
+    </tr>
+	</thead>
+	<tbody>
+	{% for i in range(length) %}
+    <tr>
+	{% if names != [] %}
+		<td>
+		<a href="{{url_for('fitsview', url_safe_name=names[i], address='/rawfiles')}}"> {{names[i]}} </a>
+		</td>
+    	{% for x in data[i][1:] %}
+    	<td> {{ x }} </td>
+    	{% endfor %}
+    {% else %}
+    	{% for x in data[i] %}
+    	<td> {{ x }} </td>
+    	{% endfor %}
+    {% endif %}
+    </tr>
+    {% endfor %}
+	</tbody>
+    </table>
+</body>
+<script>
+	$(document).ready(function(){
+		$("raw_files").tablesorter();
+	});
+</script>
+{% endblock %}

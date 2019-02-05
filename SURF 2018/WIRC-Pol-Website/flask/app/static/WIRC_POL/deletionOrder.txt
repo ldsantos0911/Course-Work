@@ -1,0 +1,8 @@
+standards
+master_skies
+master_flats
+master_darks
+target_refs
+raw_files
+calib_files
+targets

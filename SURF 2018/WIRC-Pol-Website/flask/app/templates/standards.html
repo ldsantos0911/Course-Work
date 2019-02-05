@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Standards</h1>
+    <hr>
+    <form method="post">
+        <label for="query">Query 'standards' Table: </label>
+        <input name="query" id="query" value="{{ request.form['query'] }}" size="100" required>
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    <body>
+        <table border=1px border-spacing=0 id="standards" class="tablesorter">
+        <thead>
+    	<tr>
+        {% for property in properties %}
+        <th>{{ property }} </th>
+        {% endfor %}
+        </tr>
+    	</thead>
+    	<tbody>
+        {% for datum in data %}
+        <tr>
+        {% for x in datum %}
+        <td> {{ x }} </td>
+        {% endfor %}
+        </tr>
+        {% endfor %}
+    	</tbody>
+        </table>   
+    </body>
+    <script>
+    	$(document).ready(function(){ 
+    		$("#standards").tablesorter(); 
+    	}); 
+    </script>
+{% endblock %}

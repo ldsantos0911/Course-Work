@@ -1,0 +1,9 @@
+def occurences(string):
+	string = string.upper()
+	occur = [0]*26
+	for char in string:
+		if ord(char) <= 90 and ord(char) >= 65:
+			occur[ord(char) - 65] += 1
+	return occur
+
+print(occurences('helloh'))

@@ -258,7 +258,11 @@ protected:
     int id;
 };
 
-
+/*
+ * @brief This is the philosopher used in the case where they are allowed 
+ * to talk with each other.
+ * @attention Student-defined class
+ */
 class TalkingPhilosopher : public Philosopher
 {
 public:

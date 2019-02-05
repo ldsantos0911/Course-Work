@@ -1,0 +1,43 @@
+Influenza A(H3N2) 2017
+
+merikelrnl msqsrtreil tkttvdhmai ikkytsgrqe knpslrmkwm mamkypitad
+kritemvper neqgqtlwsk msdagsdrvm vsplavtwwn rngpvtstvh ypkvyktyfd
+kverlkhgtf gpvhfrnqvk irrrvdinpg hadlsakeaq dvimevvfpn evgariltse
+sqltitkekk eelrdckisp lmvaymlere lvrktrflpv aggtssiyie vlhltqgtcw
+eqmytpgggv rnddvdqsli iaarnivrra avsadplasl lemchstqig gtrmvdilkq
+npteeqavdi ckaamglris ssfsfggftf krtsgssvkk eeevltgnlq tlrirvhegy
+eeftmvgkra tailrkatrr lvqlivsgrd eqsiaeaiiv amvfsqedcm ikavrgdlnf
+vnranqrlnp mhqllrhfqk dakvlfqnwg vehidsvmgm vgvlpdmtps temsmrgirv
+skmgvdeyss tervvvsidr flrvrdqrgn vllspeevse tqgterltit ysssmmwein
+gpesvlvnty qwiirnweav kiqwsqnpam lynkmefepf qslvpkatrs qysgfvrtlf
+qqmrdvlgtf dtaqiikllp faaappkqsr mqfssltvnv rgsgmrilvr gnspvfnynk
+ttkrltilgk dagtliedpd estsgvesav lrgfliigke drrygpalsi nelsnlakge
+kanvligqgd vvlvmkrkrd ssiltdsqta tkrirmain
+
+Swine Flu(H1N1) 2017
+
+merikelrdl msqsrtreil tkttvdhmai ikkytsgrqe knpalrmkwm mamkypitad
+krimdiiper neqgqtlwsk tndagsdrvm vsplavtwwn rngpttstvh ypkvyktyfe
+kverlkhgtf gpvhfrnqvk irrrvdtnpg hadlsakeaq dvimevvfpn evgariltse
+sqlaitkekk eelqnckiap lmvaymlere lvrktrflpv aggtgsvyie vlhltqgtcw
+eqmytpggev rnddvdqsli iaarnivrra avsadplasl lemchstqig gvkmvdilkq
+npteeqavdi ckaaiglris ssfsfggftf krtsgssvkk eeemltgnlq tlklrvhegy
+eeftmvgrra tailrkatrr liqlivsgrd eqsiaeaiiv amvfsqedcm ikavrgdlnf
+vnranqrlnp mhqllrhfqk dakvlfqnwg ietidnvmgm igilpdmtps temslrgirv
+skmgvdeyss tervvvsidr flrvrdqrgn vllspeevse tqgtekltit ysssmmwein
+gpesvlvnty qwiirnweiv kiqwsqdptm lynkmefepf qslvpkatrs rysgfvrtlf
+qqmrdvlgtf dtvqiikllp faaappeqsr mqfssltvnv rgsglrilvr gnspvfnynr
+atkrltvlgk dagaltedpd egtsgvesav lrgflilgke dkrygpalsi nelsnlakge
+kanvligqgd ivlvmkrkrd ssiltdsqta tkrirmain
+
+Alignment:
+
+||||||||*||||||||||||||||||||||||||||||||||||||*|||||||||||||||||||||****|||||||||||||||**||||||||||||||||||||||||*|||||||||||||||*|||||||||||||||||||||||||||||*||||||||||||||||||||||||||||||||||||||||*||||||||||**|||*||||||||||||||||||||||||||||*|*|||||||||||||||||||||||*|||||||||||||||||||||||||||||||||||||||||||||||**|||||||||||||||||||||||*|||||||||||||||||||||||||||||||*|||||||||**||||||||||||||*|||||||||||||||*|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*|*||*|||||*|*||||||||||||*|||||||||||||||||||||||||||||||||||||||||||||||||||||||*|||||||||||||||||||||||||||||||||||*||||||||*|*||||||||||||||||||||||||*|||||||||||||||||||||||*||||||||||||||*|||||||||||||||||||*|||||||||||||||*|*|||||*|||||||*|*||||||*|||||||||||||||*|||||*|||||||||||||||||||||||||||||||*||||||||||||||||||||||||||||||
+Score for this alignment: 1521
+
+This demonstrates the overwhelming similarity between these two strains of influenza, one the swine flu
+as found in a human and the other influenza A (a more common flu), as found in a human. This also
+demonstrates that two sequences with a high alignment score are related. Using this alignment as an
+example, if we did not already know the identity of both of the sequences but knew that one of them
+is a strain of influenza, we could reasonably infer from the high score that the other is also a
+strain of influenza.

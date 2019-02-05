@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<style>
+    body {
+        font-family: sans-serif;
+        max-width: 800px;
+        margin-top: -21px;
+        margin-left: 66px;
+        border-left: 1px solid gray;
+        padding-left: 24px;
+        margin-bottom: -15px;
+    }
+
+    div.content {
+        padding-top: 21px;
+        padding-bottom: 15px;
+    }
+
+    h1 {
+
+    }
+
+    hr {
+        color: gray;
+        background-color: gray;
+        height: 1px;
+        margin-left: -24px;
+        margin-right: -24px;
+        border: 0px solid gray;
+    }
+
+    .draft {
+        color: #008080;
+    }
+
+    table {
+        padding: 0;
+        border-bottom: 1px solid grey;
+        border-right: 1px solid grey;
+    }
+
+    tr {
+        margin: 0;
+        padding: 2px;
+    }
+    td {
+        border-left: 1px solid grey;
+        border-top: 1px solid grey;
+        margin: 0;
+        padding: 2px;
+    }
+    th {
+        border-left: 1px solid grey;
+        border-top: 1px solid grey;
+        margin: 0;
+        padding: 2px;
+    }
+
+
+    span.keyword {
+        font-weight: bold;
+    }
+    span.emph {
+        font-style: italic;
+    }
+    span.deemph {
+        color: #bbbbbb;
+    }
+    span.hilite {
+        text-decoration: underline;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    div.author {
+        float: right;
+        margin-top: 27px;
+        color: grey;
+    }
+
+    .code {
+        font-family: monospace;
+    }
+    pre code {
+        display: block;
+        background: ghostwhite !important;
+        border: 2px dashed grey !important;
+        padding-top: 11px !important;
+        padding-bottom: 11px !important;
+        padding-right: 21px !important;
+        padding-left: 21px !important;
+    }
+    div.attention {
+        background: #ffcccc;
+        border: 2px dashed red;
+        padding-top: 11px;
+        padding-bottom: 11px;
+        padding-right: 21px;
+        padding-left: 21px;
+    }
+    div.quote {
+        background: #ccccff;
+        border: 2px dashed steelblue;
+        padding-top: 11px;
+        padding-bottom: 11px;
+        padding-right: 21px;
+        padding-left: 21px;
+    }
+    div.hint {
+        background: #ccffcc;
+        border: 2px dashed green;
+        padding-top: 11px;
+        padding-bottom: 11px;hints
+        padding-right: 21px;
+        padding-left: 21px;
+    }
+    div.points {
+        float: left;
+        text-align: right;
+        margin-left: -88px;
+        min-width: 50px;
+    }
+    li div.points {
+        margin-left: -128px;
+    }
+    div.points.easy {
+        color: #008000;
+    }
+    div.points.hard {
+        color: #800000;
+        font-weight: bold;
+    }
+</style>
+<title>CS2 Assignment 5: Graphs</title>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=cpp"></script>
+</head>
+
+<body>
+<div class="content">
+
+<div class="author"></div>
+<h1>CS2 Assignment 5: Graphs</h1>
+<h2>Due Tuesday, February 6, 2018, at 17:00 PST</h2>
+
+<hr />
+
+<h2>Introduction</h2>
+
+<p>This is the CS2 assignment on graphs.</p>
+
+<p>When finished, please enclose your submission as a ZIP file named <span class="code">cs2week5-[NAME].zip</span> or a tar.gz file named <span class="code">cs2week5-[NAME].tar.gz</span>, and upload it to the Week 5 assignment module on Moodle.</p>
+
+<p>Include answers to all short-answer questions in <span class="code">README.md</span> unless another file is specified.</p>
+
+<p><div class="points hard">0</div>Remember that while you are encouraged to at least attempt the "elevated difficulty" points (as exemplified by this example paragraph), they are targeted primarily toward experienced students looking for an additional challenge. You should <span class="emph">not</span> feel obligated to complete them if you find that you are having trouble with them.</p>
+
+&nbsp;
+
+<hr />
+
+<h2>Assignment Background</h2>
+
+<p>Many problems in computer science can be expressed in the language of <span class="keyword">graphs</span>, which are structures consisting of <span class="keyword">vertices</span> and <span class="keyword">edges</span> connecting vertices. In formal language, a graph is a collection <span class="code">G = (V, E)</span> consisting of a set of vertices <span class="code">V</span> and a set of edges <span class="code">E</span>. Edges are defined as ordered pairs <span class="code">e := (v1, v2)</span> of the vertices they connect.</p>
+
+<p>Graphs can either be <span class="keyword">directed</span> or <span class="keyword">undirected</span>. In other words, edges may be treated as one-way or as two-way. Which treatment is used depends on the nature of the data being represented and on the problem being considered. Note that an undirected graph is equivalent to a directed graph containing edge <span class="code">(v2, v1)</span> for every edge <span class="code">(v1, v2)</span> in the graph.</p>
+
+<p>Edges can have labels assigned to them. Most commonly, edge labels are used for <span class="keyword">edge weights</span>, which are used by some algorithms that expect a cost for each edge. Observe that costs may sometimes be negative depending on the problem; some algorithms are designed for only non-negative edge weights, so be careful when applying them. You won't have to worry about negative edge weights for this assignment.</p>
+
+<p>There are two main ways that graphs are represented: <span class="keyword">adjacency lists</span> and <span class="keyword">adjacency matrices</span>. An adjacency list is a data structure assigning, to each vertex <span class="code">u</span>, a list of directly connected vertices <span class="code">v</span> for which the edge <span class="code">(u, v)</span> exists. An adjacency matrix is a data structure assigning, in matrix form, a value to each possible ordered pair of vertices depending on whether or not an edge exists between them; each row and each column represents a vertex in the graph.</p>
+
+<p>The adjacency-matrix representation has some useful properties - for instance, testing whether or not two vertices are connected may be done in constant time, and inverting all of the edges of a graph is as simple as taking the transpose of the matrix. Some graph algorithms are specifically formulated with adjacency matrices in mind, e.g. the Floyd-Warshall algorithm for all-pairs shortest paths. Additionally, on an unweighted graph, the adjacency matrix can be compactly represented as a sequence of individual bits. However, an adjacency list performs much better space-wise in a sparse graph with few edges. Additionally, in an object-oriented environment, information about edges is often stored naturally with the "vertex" items themselves, in a fashion directly analogous to an adjacency list. We will use that approach in the setup of this assignment.</p>
+
+<p>There are several standard problems that can be considered on any graph. We'll list a few here: </p>
+
+<p>
+<ul>
+    <li>Graph searching: we want to search a particular graph for a specific node or nodes defined by a certain property. You've already seen <span class="keyword">depth-first search</span> and <span class="keyword">breadth-first search</span> in an earlier assignment applied to trees; the same algorithms work with general graphs, with minor modifications.</li>
+    <li>Spanning tree: specifically, we often want to find the <span class="keyword">minimum spanning tree</span> of a particular graph; that is, the tree of minimum total weight that includes all the nodes. This is of particular use in networking, where routers want to ensure that they never route packets in a circle.</li>
+    <li>Single-source shortest path: sometimes we want to find the <span class="keyword">shortest path</span> from one node to another. We're particularly interested in an efficient solution, since this is such a common problem - everything from computer networking to robot pathfinding needs a good solution to this problem.</li>
+    <li>All-pairs shortest path: sometimes we're interested in the shortest paths between all pairs of nodes. If we have storage space to spare and are doing lots of path calculations over a static graph, we can run such an algorithm once and get fast answers for individual shortest-path queries afterwards.</li>
+    <li>Maximum flow: instead of weights to edges, we attach capacities, then see how much flow can be carried from one node to another. Equivalent to the minimum-cut problem, which asks how little total edge weight we can remove to divide a graph into two pieces.</li>
+    <li>Traveling salesman problem: given a list of destinations, we want to visit all of them in the most efficient way possible. This is a classic NP-complete problem; an efficient solution to this question would revolutionize computer science, far beyond its obvious applications to supply and transportation logistics, as it can be shown that a fast solution to this problem implies a fast solution to any one of a huge basket of useful but hard problems; this'll be discussed at length in CS21.</li>
+</ul>
+</p>
+
+<p>For this assignment, we'll be asking you to reason through, and implement, a minimum-spanning-tree algorithm and a single-source shortest path algorithm. We'd love to walk you through the others, but that would make this assignment too long! You'll see graph algorithms again in much more detail in Ma/CS6 (if you haven't taken it yet) and in CS38 (if you're taking this course first).</p>
+
+<hr />
+
+<h2>Prerequisites</h2>
+
+<p>These are the prerequisites for getting this assignment to compile (ubuntu package names):</p>
+<ul><li>g++ 4.6.x+</li>
+<li>libsdl1.2-dev (SDL 1.2)</li>
+<li>libsdl-gfx1.2-dev</li></ul>
+
+<p>Ask a TA if you need help retrieving these packages, or if these packages appear to be missing from the CS cluster.</p>
+
+<div class="attention">Make sure you have a good handle on the assignment background and the concepts referenced before proceeding.</div>
+
+<h2>Assignment (26 possible points)</h2>
+
+<h4>Building the Assignment</h4>
+
+<p><div class="points easy">0</div>Before you proceed further, <span class="code">make</span> the main assignment. Then, run the visualizer with <span class="code">./GraphApp</span>.</p>
+
+<p>Take a look at what the graph looks like. Also, run valgrind ./GraphApp to check how much memory is leaking from the existing code. As you write your code, compare your valgrind results to this and make sure you delete any memory you allocate!</p>
+
+<p>Here's an overview of the controls:</p>
+
+<ul><li>q: Quit.</li>
+<li>m: Prim's algorithm</li>
+<li>k: Kruskal's algorithm</li>
+<li>p: Shortest path</li>
+<li>r: New Graph (Randomized nodes and edges) </li>
+<li>c: Cycle Through Fixed Graphs (Probably easier to test functions on)</li>
+<li>If you want to implement any other algorithm (red points), add controls.
+    Take a look at GraphApp.cpp if you want to do this.
+</li></ul>
+
+<p></p>
+
+<h3>Part -1: Bonus Question</h3>
+
+<p>
+    No bonus question this week. Good luck with midterms! For no points, if you are bored ask a TA for a question.
+</p>
+
+<h3>Part 0: Debugging</h3>
+
+<p><div class="points easy">1</div>Here's a code snippet. Is there anything wrong with the depth-first search algorithm implemented in <span class="code">dfs()</span>? If so, how would you fix it? If not, how do you know?</p>
+
+<p><div class="points easy">2</div>Show that the algorithm is correct by writing a simple test case. Use the template below. </p>
+
+
+
+<pre><code class="prettyprint">/* debugging example */
+
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+class Node
+{
+    int value;
+    std::vector&lt;Node*&gt; edges;
+public:
+    // insert constructors, destructors,
+    // accessors, and mutators here
+    bool dfs(int to_find);
+};
+
+// true indicates that the value was found, and false indicates that the value was not found.
+bool Node::dfs(int to_find)
+{
+    if(this-&gt;value == to_find)
+    {
+        return true;
+    }
+    std::vector&lt;Node*&gt;::iterator i;
+    for(i = this-&gt;edges.begin(); i != this-&gt;edges.end(); i++)
+    {
+        Node * n = *i;
+        bool r = n-&gt;dfs(to_find);
+        if(r)
+        {
+            return r;
+        }
+    }
+    return false;
+}
+
+int main(void)
+{
+    // TODO: Write your test code here
+
+}
+
+</code></pre>
+
+<h3>Part 1: Minimum Spanning Trees</h3>
+
+<h4>Short Answer</h4>
+
+<p>This section is most useful if you reason through these problems on your own, or discuss the problems lightly with a friend or TA. Try not to consult external resources for the answers. All answers you provide must be your own. Put your answers to the questions below in a file named  <span class="code">MST_answers.txt.</span></p>
+
+<p><div class="points easy">1</div>Before we can talk about MST algorithms, we need to pinpoint precisely what a MST is. What are the three most essential properties of a MST? Explain what each of these properties really means in terms of graphs and their properties. (Hint: it's all in the name!)</p>
+
+<p>Now that we understand the meaning of "minimum spanning tree", we can start to develop an algorithm. There are two common algorithms for this problem. We'll look at both of them.</p>
+
+<p>Suppose we start off only with one node in our candidate tree. For the next step, we should pick an adjacent node and its edge to add to the tree. Which should we pick? Justify your answer.</p>
+
+<p>Now we have two (or three, or N) nodes in our candidate tree. Which nodes and edges should we pick at each subsequent step, and why? How do we know when we're finished, and why? (In the literature, this method is known as Prim's algorithm.)</p>
+
+<p>Let's look at a different algorithm. Suppose that we instead start off with a lot of candidate trees - one per node, in fact. We can join trees at will by picking edges. Which edge should we pick at each step? When do we stop? Justify your answers. (In the literature, this method is known as Kruskal's algorithm.)</p>
+
+<h4>Programming</h4>
+
+<p>In this section, you'll write an implementation of a MST algorithm of your choice. You can either implement Kruskal's or Prim's MST algorithm. There are
+spots in the code base for each one. </p>
+
+<p><div class="points easy">1</div>Before you start, pick one of the algorithms you described in the short-answer section and outline it in your choice of stepwise English, Python, or other pseudocode. You should be able to refer to this outline and translate it more-or-less directly into working code.</p>
+
+<p><div class="points easy">4</div>Now open up <span class="code">GraphAlgorithms.cpp</span> in the assignment's source tree, and scroll down to <span class="code">void buildMSTPrim(Graph g, GraphApp *app) </span> or <span class="code">void void buildMSTKruskal(Graph g, GraphApp *app) </span>. This is the function you will need to implement. This function, when run, should find the minimum spanning tree of the graph and draw the edges of the MST using the <span class="code">drawEdge</span> function.</p>
+
+<p>If you've done the short-answer section, you should already have an idea of how to proceed. You may implement either algorithm discussed in the short-answer section. You may also implement another algorithm if you happen to know of one; this will not yield any extra points.</p>
+
+<p>Weight your edges by distance. The Node struct has a function <span class="code">
+    double distance (Node a)</span> that will get the distance to the specified node.</p>
+
+
+<div class="attention">You can assume that the graph is connected for this assignment, but this is not necessarily the case for every application. Thing about how that assumption simplifies things. </div>
+
+&nbsp;
+
+<div class="hint">You may need to create new data structures or functions to complete this part of the assignment. In general, there are no restrictions as to what you can change in this week's template code as long as the main objectives are met.</div>
+
+<p>Your MST function does not need to clean up any existing MST before recalculating. This is done for you in GraphApp.cpp. Feel free to look at it.</p>
+
+<p>The visualizer will show off your MST when you type m or k depending on which algorithm you implemented. You can rebuild the visualizer just by running <span class="code">make</span> from the command line while in the assignment's codebase directory. You can then run the visualizer by running <span class="code">GraphApp</span> from the same directory.</p>
+
+<p>To recompute the MST, press the r or c key while the visualizer is running. This will clean up the old graph and build a completely new one. Then you can hit k or m against to compute the MST.</p>
+
+<h3>Part 2: Single-Source Shortest-Path</h3>
+
+
+<h4>Short Answer</h4>
+
+<p>This section is most useful if you reason through these problems on your own, or discuss the problems lightly with a friend or TA. Try not to consult external resources for the answers. All answers you provide must be your own. Place your answers to the questions below in a file named<span class="code"> SSSP_answers.txt.</span></p>
+
+<p>We'll help you reason through a common shortest-paths algorithm known as Dijkstra's algorithm. This algorithm is the gold standard for the single-source problem; though superseded in some applications by the more sophisticated A* algorithm, Dijkstra's algorithm is still useful in cases where it is difficult to estimate the remaining distance to the goal, e.g. when edges have different weights independent of standard notions of 'distance'.</p>
+
+<p><div class="points easy">1</div>First, let's start off looking just at the source node. If we're trying to minimize the path length, which neighbor does it make the most sense to investigate first?</p>
+
+<p>Now we have shortest paths to two nodes (or eventually three nodes, or eventually N nodes). Notice that, at least in the two-nodes case, both of these paths are shortest paths: one of them is trivial, and the other may be proven minimal by contradiction. If we're trying to minimize the path length to the goal - <span class="emph">which we have not yet found using our algorithm</span> - which node does it make the most sense to investigate at each further step? What else should we be doing at each step, if anything, to ensure that we'll end with a result that makes sense? Why does doing this end up yielding a shortest path to another node? (Does it?)</p>
+
+<div class="hint">Hint: You may need to attach some additional information to each node.</div>
+
+<p>Suppose we've done many iterations and have now found our goal. How do we know that we're done? How can we now derive the path we want?</p>
+
+<h4>Programming</h4>
+
+<p>Now that you've reasoned through the fundamentals behind Dijkstra's algorithm, you can implement it in code.</p>
+
+<p><div class="points easy">1</div>Before you start, outline Dijkstra's algorithm in your choice of stepwise English, Python, or other pseudocode. You should be able to refer to this outline and translate it more-or-less directly into working code.</p>
+
+<p><div class="points easy">4</div>Now open up <span class="code">GraphAlgorithms.cpp</span> in the assignment's source tree, and scroll down to <span class="code">void findShortestPath(int start, int end, Graph g, GraphApp *app) </span>. This is the function you will need to implement.</p>
+
+<p>This function declaration might be scary-looking, but it's actually not too bad: the function takes a source and destination node and a graph structure detailing the nodes and all of the edges in the graph, and returns a shortest path.</p>
+
+<p><div class="points hard">3</div>You'll need a way to pick nodes according to some metric that will constantly be changing. There's no easy way to do this, unfortunately; not even <span class="code">std::priority_queue</span> will help you, because it doesn't support <span class="code">decreaseKey</span>. We've found that just using an <span class="code">std::vector</span> is good enough; since you're not computing lots of shortest paths, the performance penalty is not large (the algorithm takes a few seconds worst-case). However, for extra points, you can use a binary heap, Fibonacci heap, or similar data structure to make your algorithm much faster. See the relevant notes on Moodle if you want hints on how that's done. You can also look at Wikipedia and other resources (no pseudocode though) </p>
+
+<div class="hint">Notice that you <span class="emph">may</span> need to add some functions and member variables in order to implement Dijkstra's algorithm successfully. Don't be afraid to switch things around!</div>
+
+<p><div class="points hard">3</div>Why stop at Dijkstra's algorithm, though? There are a number of shortest-path algorithms out there. If you implement another shortest-path algorithm alongside Dijkstra's algorithm and can somehow switch between them (e.g. adding a new button to the gui), you can earn up to three extra points. Be sure to document how to toggle this different shortest-path algorithm. Again, you can look at Wikipedia and other resources. </p>
+
+<p>In any case, you'll need to use the draw_edge function to visualize the path. The visualizer will take the edges you add and draw out your path on the screen.</p>
+
+<p>The visualizer will test out your code at startup and try to find a shortest path between two points. You can compute your own shortest paths. Left-click on any node to set the source (green node), and right-click on any node to set the destination (red node). Then press p to compute a path. And the path will appear in pink on the graph.</p>
+
+<h3>Part 3: Minimum Spanning Trees (Again!)</h3>
+<p><div class="points hard">5</div>Earlier in the assignment you implemented either Prim or Kruskal's spanning tree algorithm. Now, if you have time and are interested, you can implement the other algorithm for a 5 additional points (1 for the outline and 4 for implementing the algorithm). </p>
+
+<h4>Test Cases</h4>
+
+<p> While the randomized graphs may be hard to visually inspect, you can toggle through a couple deterministic graphs using the c key in the visualizer. There it will be easier to manually check your algorithms and compare outputs with your peers. </p>
+
+<p>Note that your paths may be different from ours depending on the order in which you consider edges. </p>
+
+<p>&nbsp;</p>
+
+<p>If you have any questions about this week's assignment, please contact &lt;cs2-c-tas@cms.caltech.edu&gt;, or show up at any TA's office hours.</p>
+
+</div>
+
+</body>
+
+</html>

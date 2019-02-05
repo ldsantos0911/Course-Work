@@ -1,7 +1,0 @@
-It is more efficient to use an approach similar to a producer-consumer queue, for
-it ensures a more even distribution of computation required per thread. If all of
-the rays are put into a queue and all of the threads work on that queue simultaneously,
-consuming a roughly equal amount of the queue, the threads will perform
-roughly equal amounts of work. This normalizes the amount of time each thread takes,
-decreasing the total time of the overall computation (which would have otherwise
-equaled the time taken by the thread with the most complex rendering).

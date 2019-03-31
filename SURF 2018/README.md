@@ -1,0 +1,1 @@
+This folder contains the coding work that I completed during the Summer of 2018. It has since been slightly modified by the lab group which I was working with. However, the code I have uploaded here is the last version which I made before the end of my Summer Research Fellowship. 

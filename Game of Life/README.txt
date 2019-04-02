@@ -11,6 +11,7 @@ $python3 gol.py [cool|warm|mono]
 
 Features that will hopefully be added in the future:
 - Reading initial board state from file (underway)
+- Pre-programmed starting configurations
 - Stopping and starting with a keypress
 - Controls in window to change settings
 - More intuitive size alterations

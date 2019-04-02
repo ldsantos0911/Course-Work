@@ -1,26 +1,30 @@
 from tkinter import *
 import random
 black = '#000000'
-box_size =7
+box_size = 15
+randoms = 800
+x_board = 1500
+y_board = 1000
 class GOL_board:
     '''
     A GOL_board will be responsible for the graphics in Conway's Game of Life.
     It will consist of small rectangles whose color will be set appropriately.
     '''
 
-    def __init__(self, x=1000, y=1000, init_str=None, fname=None):
+    def __init__(self, x=x_board, y=y_board, init_str=None, fname=None):
         self.board = []
         self.board_bin = []
         self.root = Tk()
         self.root.geometry(str(x) + 'x' + str(y))
         self.board_canvas = Canvas(self.root, width=x, height=y)
         self.board_canvas.pack()
+        self.board_canvas.config(background=black)
 
-        for i in range(x // box_size):
+        for i in range(y // box_size):
             temp_row = []
             temp_row_bin = []
-            for j in range(y // box_size):
-                temp_row.append(self.board_canvas.create_rectangle(j * box_size, \
+            for j in range(x // box_size):
+                temp_row.append(self.board_canvas.create_oval(j * box_size, \
                 i * box_size, (j + 1) * box_size, (i + 1) * box_size, fill=black, outline=black))
                 temp_row_bin.append(0)
             self.board.append(temp_row)
@@ -68,11 +72,11 @@ class GOL_board:
             f.close()
 
     def random_board(self):
-        for i in range(5000):
+        for i in range(randoms):
             y = box_size * random.randint(0, len(self.board_bin) - 1)
             x = box_size * random.randint(0, len(self.board_bin[0]) - 1)
             self.board[int(y / box_size)][int(x / box_size)] = \
-                    self.board_canvas.create_rectangle(x, y, \
+                    self.board_canvas.create_oval(x, y, \
                     x + box_size, y + box_size, fill=random_color())
             self.board_bin[int(y / box_size)][int(x / box_size)] = 1
 
@@ -83,11 +87,11 @@ class GOL_board:
                 self.board_canvas.delete(self.board[i][j])
                 if col == 0:
                     self.board_bin[i][j] = 0
-                    self.board[i][j] = self.board_canvas.create_rectangle(j * box_size, \
+                    self.board[i][j] = self.board_canvas.create_oval(j * box_size, \
                     i * box_size, (j + 1) * box_size, (i + 1) * box_size, fill=black, outline=black)
                 else:
                     self.board_bin[i][j] = 1
-                    self.board[i][j] = self.board_canvas.create_rectangle(j * box_size, \
+                    self.board[i][j] = self.board_canvas.create_oval(j * box_size, \
                     i * box_size, (j + 1) * box_size, (i + 1) * box_size, fill=random_color())
         self.root.update()
 

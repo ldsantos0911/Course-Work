@@ -1,26 +1,34 @@
 from board import *
+import time
 
 def play(**kwargs):
     pass
 
 def update(board_bin):
     ret_board = board_bin.copy()
-    for x, row in enumerate(board_bin):
-        for y, col in enumerate(row):
+    for y, row in enumerate(board_bin):
+        for x, col in enumerate(row):
             alive = (col == 1)
             neighbors = [(x - 1, y - 1), (x - 1, y), (x - 1, y + 1), (x, y - 1),
                          (x, y + 1), (x + 1, y - 1), (x + 1, y), (x + 1, y + 1)]
-            living_neigh =
-                len([i for i in neighbors if (i[0] < len(board)) and (i[0] >= 0)
-                                        and (i[1] < len(row)) and (i[1] >= 0)])
+            living_neigh = 0
+            for i, tup in enumerate(neighbors):
+                if tup[0] < len(row) and tup[0] >= 0 and \
+                tup[1] < len(board_bin) and tup[1] >= 0 and \
+                board_bin[tup[1]][tup[0]] == 1:
+                   living_neigh += 1
+
             if alive and (living_neigh < 2 or living_neigh > 3):
-                ret_board[x][y] = 0
-            elif alive and (living_neigh == 2 or living_neigh == 3):
-                ret_board[x][y] = 1
-            elif not alive and (living_neigh == 3):
-                ret_board[x][y] = 1
+                ret_board[y][x] = 0
+            if alive and (living_neigh == 2 or living_neigh == 3):
+                ret_board[y][x] = 1
+            if not alive and (living_neigh == 3):
+                ret_board[y][x] = 1
     return ret_board
 
 
 if __name__== '__main__':
-    pass
+    game_board = GOL_board()
+    while True:
+        game_board.update(update(game_board.get_rects_binary()))
+        time.sleep(.0001)

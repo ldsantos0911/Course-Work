@@ -1,32 +1,41 @@
 from tkinter import *
+import random
 black = '#000000'
+box_size =7
 class GOL_board:
     '''
     A GOL_board will be responsible for the graphics in Conway's Game of Life.
     It will consist of small rectangles whose color will be set appropriately.
     '''
 
-    def __init__(self, x=0, y=0, init_str=None):
+    def __init__(self, x=1000, y=1000, init_str=None, fname=None):
         self.board = []
         self.board_bin = []
         self.root = Tk()
-        root.geometry(str(x) + 'x' + str(y))
-        self.board_canvas = Canvas(root, width=x, height=y)
-        board_canvas.pack()
+        self.root.geometry(str(x) + 'x' + str(y))
+        self.board_canvas = Canvas(self.root, width=x, height=y)
+        self.board_canvas.pack()
 
-        for i in range(x // 10):
+        for i in range(x // box_size):
             temp_row = []
             temp_row_bin = []
-            for j in range(y // 10):
-                temp_row.append(board_canvas.create_rectangle(j * 10, \
-                i * 10, (j + 1) * 10, (i + 1) * 10, fill=black, outline=black))
+            for j in range(y // box_size):
+                temp_row.append(self.board_canvas.create_rectangle(j * box_size, \
+                i * box_size, (j + 1) * box_size, (i + 1) * box_size, fill=black, outline=black))
                 temp_row_bin.append(0)
-            board.append(temp_row)
-            board_bin.append(temp_row_bin)
+            self.board.append(temp_row)
+            self.board_bin.append(temp_row_bin)
 
         if init_str != None:
             self.update(self.string_to_board(init_str))
 
+        if fname != None:
+            self.update(self.from_file(fname))
+
+        if init_str == None and fname == None:
+            self.random_board()
+
+        self.root.update()
 
     def get_rects_binary(self):
         return self.board_bin
@@ -54,9 +63,18 @@ class GOL_board:
                 for col in row_lst:
                     row_temp.append(int(col))
                 board_ret.append(row_temp)
+            return board_ret
         finally:
             f.close()
 
+    def random_board(self):
+        for i in range(5000):
+            y = box_size * random.randint(0, len(self.board_bin) - 1)
+            x = box_size * random.randint(0, len(self.board_bin[0]) - 1)
+            self.board[int(y / box_size)][int(x / box_size)] = \
+                    self.board_canvas.create_rectangle(x, y, \
+                    x + box_size, y + box_size, fill=random_color())
+            self.board_bin[int(y / box_size)][int(x / box_size)] = 1
 
     def update(self, _board):
         # Update rectangle colors based on binary list
@@ -65,13 +83,13 @@ class GOL_board:
                 self.board_canvas.delete(self.board[i][j])
                 if col == 0:
                     self.board_bin[i][j] = 0
-                    self.board[i][j] = board_canvas.create_rectangle(j * 10, \
-                    i * 10, (j + 1) * 10, (i + 1) * 10, fill=black, outline=black)
+                    self.board[i][j] = self.board_canvas.create_rectangle(j * box_size, \
+                    i * box_size, (j + 1) * box_size, (i + 1) * box_size, fill=black, outline=black)
                 else:
                     self.board_bin[i][j] = 1
-                    self.board[i][j] = board_canvas.create_rectangle(j * 10, \
-                    i * 10, (j + 1) * 10, (i + 1) * 10, fill=random_color(),
-                    outline=random_color())
+                    self.board[i][j] = self.board_canvas.create_rectangle(j * box_size, \
+                    i * box_size, (j + 1) * box_size, (i + 1) * box_size, fill=random_color())
+        self.root.update()
 
 def random_color():
     '''

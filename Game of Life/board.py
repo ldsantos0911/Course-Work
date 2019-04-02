@@ -102,16 +102,18 @@ def random_color(theme=''):
     '''
     color = '#'
     digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f']
-    digits_0 = ['a', 'b', 'c', 'd', 'e', 'f']
-    digits_1 = [0, 1, 2, 3, 4]
+
     if theme == 'warm':
+        digits_0 = ['c', 'd', 'e', 'f']
+        digits_1 = [0, 1, 2]
         color += str(random.choice(digits_0))
         for i in range(2):
             color += str(random.choice(digits))
         for i in range(3):
             color += str(random.choice(digits_1))
     elif theme == 'cool':
-
+        digits_0 = [6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f']
+        digits_1 = [0, 1, 2, 3, 4]
         color += str(random.choice(digits_1))
         color += str(random.choice(digits))
         for i in range(2):

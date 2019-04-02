@@ -2,7 +2,10 @@ from board import *
 import time
 
 def play(**kwargs):
-    pass
+    game_board = GOL_board()
+    while True:
+        game_board.update(update(game_board.get_rects_binary()))
+        time.sleep(.0001)
 
 def update(board_bin):
     ret_board = board_bin.copy()
@@ -28,7 +31,4 @@ def update(board_bin):
 
 
 if __name__== '__main__':
-    game_board = GOL_board()
-    while True:
-        game_board.update(update(game_board.get_rects_binary()))
-        time.sleep(.0001)
+    play()

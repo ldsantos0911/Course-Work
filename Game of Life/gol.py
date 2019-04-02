@@ -1,8 +1,9 @@
 from board import *
 import time
+import sys
 
-def play(**kwargs):
-    game_board = GOL_board()
+def play(theme_str=''):
+    game_board = GOL_board(theme=theme_str)
     while True:
         game_board.update(update(game_board.get_rects_binary()))
         time.sleep(.0001)
@@ -31,4 +32,7 @@ def update(board_bin):
 
 
 if __name__== '__main__':
-    play()
+    if len(sys.argv) >= 2:
+        play(sys.argv[1])
+    else:
+        play()

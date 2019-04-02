@@ -11,7 +11,7 @@ class GOL_board:
     It will consist of small rectangles whose color will be set appropriately.
     '''
 
-    def __init__(self, x=x_board, y=y_board, init_str=None, fname=None):
+    def __init__(self, x=x_board, y=y_board, init_str=None, fname=None, theme=''):
         self.board = []
         self.board_bin = []
         self.root = Tk()
@@ -19,6 +19,7 @@ class GOL_board:
         self.board_canvas = Canvas(self.root, width=x, height=y)
         self.board_canvas.pack()
         self.board_canvas.config(background=black)
+        self.theme = theme
 
         for i in range(y // box_size):
             temp_row = []
@@ -77,7 +78,7 @@ class GOL_board:
             x = box_size * random.randint(0, len(self.board_bin[0]) - 1)
             self.board[int(y / box_size)][int(x / box_size)] = \
                     self.board_canvas.create_oval(x, y, \
-                    x + box_size, y + box_size, fill=random_color())
+                    x + box_size, y + box_size, fill=random_color(self.theme))
             self.board_bin[int(y / box_size)][int(x / box_size)] = 1
 
     def update(self, _board):
@@ -92,15 +93,34 @@ class GOL_board:
                 else:
                     self.board_bin[i][j] = 1
                     self.board[i][j] = self.board_canvas.create_oval(j * box_size, \
-                    i * box_size, (j + 1) * box_size, (i + 1) * box_size, fill=random_color())
+                    i * box_size, (j + 1) * box_size, (i + 1) * box_size, fill=random_color(self.theme))
         self.root.update()
 
-def random_color():
+def random_color(theme=''):
     '''
     Returns a string containing 6 hexadecimal digits which represents a color.
     '''
     color = '#'
     digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f']
-    for i in range(6):
+    digits_0 = ['a', 'b', 'c', 'd', 'e', 'f']
+    digits_1 = [0, 1, 2, 3, 4]
+    if theme == 'warm':
+        color += str(random.choice(digits_0))
+        for i in range(2):
+            color += str(random.choice(digits))
+        for i in range(3):
+            color += str(random.choice(digits_1))
+    elif theme == 'cool':
+
+        color += str(random.choice(digits_1))
         color += str(random.choice(digits))
+        for i in range(2):
+            color += str(random.choice(digits))
+        color += str(random.choice(digits_0))
+        color += str(random.choice(digits))
+    elif theme == 'mono':
+        color = '#FFFFFF'
+    else:
+        for i in range(6):
+            color += str(random.choice(digits))
     return color

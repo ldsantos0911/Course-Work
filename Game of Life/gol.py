@@ -66,7 +66,7 @@ def set_papers(start, game_board):
     for i in range(start, buffer + start):
         filename = 'board{}.jpg'.format(i)
         app('Finder').desktop_picture.set(mactypes.File(filename))
-        time.sleep(.0001)
+        time.sleep(.5)
 
 def save_board(game_board, fname=''):
     game_board.board_canvas.postscript(file=(fname + '.eps'))

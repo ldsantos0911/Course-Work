@@ -1,3 +1,0 @@
-[submodule "asteroids"]
-	path = asteroids
-	url = git@gitlab.caltech.edu:ldsantos/asteroids.git

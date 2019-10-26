@@ -5,6 +5,7 @@ box_size = 20
 randoms = 800
 x_board = 1500
 y_board = 1000
+
 class GOL_board:
     '''
     A GOL_board will be responsible for the graphics in Conway's Game of Life.
